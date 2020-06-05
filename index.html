@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Tip Calculator</title>
+  </head>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+    }
+    .container {
+      width: 80vw;
+      margin: 10% auto;
+      max-width: 562px;
+      box-shadow: 1rem 2rem 5rem grey;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header {
+      background: grey;
+      text-align: center;
+      min-height: 111px;
+    }
+
+    .header h2 {
+      margin: 0.75rem;
+      color: white;
+      text-align: center;
+      text-transform: capitalize;
+      font-weight: 100;
+      letter-spacing: 0.2rem;
+    }
+
+    .user {
+      background-color: aliceblue;
+      align-self: stretch;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 1rem 0 1.75rem;
+    }
+    input,
+    button {
+      margin-top: 0.75rem;
+      align-self: center;
+      width: 80%;
+      padding: 0.25rem 1.25rem;
+    }
+
+    @media screen and (min-width: 562px) {
+      .user {
+        flex-direction: row;
+      }
+    }
+
+    ::placeholder {
+      color: rgb(224, 212, 212);
+      font-size: 13px;
+      text-emphasis: emphasis;
+      font-size: 0.6rem;
+      text-align: center;
+    }
+  </style>
+  <body>
+    <section class="container">
+      <div class="header">
+        <h2>Please Enter an Amount below</h2>
+      </div>
+      <div class="user">
+        <input type="text" placeholder="Enter the Amount" />
+        <button>Calculate</button>
+      </div>
+    </section>
+    <script>
+      let amt = document.querySelector("input");
+      let btn = document.querySelector("button");
+
+      btn.addEventListener("click", calcTip);
+
+      function calcTip() {
+        try {
+          if (amt.value == "") {
+            throw "Enter an Amount";
+          }
+          if (isNaN(amt.value)) {
+            throw "<em style='color:peachpuff'>" +
+              amt.value +
+              "</em> is not a valid amount";
+          }
+          let tip = (amt.value * 0.15).toFixed(2);
+          document.querySelector("h2").innerHTML =
+            "Tip $" + tip + "<br> for bill amount of $" + amt.value;
+        } catch (err) {
+          document.querySelector("h2").innerHTML = err;
+        } finally {
+          amt.value = "";
+          amt.focus();
+        }
+      }
+    </script>
+  </body>
+</html>
